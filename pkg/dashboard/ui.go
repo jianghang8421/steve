@@ -47,11 +47,14 @@ func Route(next http.Handler, uiSetting func() string) http.Handler {
 	root.NotFoundHandler = next
 
 	return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		logrus.Info("jianghang steve handle")
 		if strings.HasPrefix(req.URL.Path, "/k8s/clusters/local") {
+			logrus.Info("jianghang steve is local")
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/k8s/clusters/local")
 			if req.URL.Path == "" {
 				req.URL.Path = "/"
 			}
+			logrus.Infof("jianghang steve is local change to url: %v", req.URL.Path)
 		}
 		root.ServeHTTP(rw, req)
 	})
