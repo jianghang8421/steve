@@ -6,6 +6,9 @@ replace (
 	github.com/crewjam/saml => github.com/rancher/saml v0.2.0
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20181214184433-b04c0947ad2f
 	github.com/matryer/moq => github.com/rancher/moq v0.0.0-20190404221404-ee5226d43009
+	github.com/rancher/kubernetes-provider-detector => github.com/cnrancher/kubernetes-provider-detector v0.1.6-0.20231201070144-30b5716078ac
+
+	github.com/rancher/norman => github.com/cnrancher/pandaria-norman v0.0.0-20230601033147-98b33cebd03f
 	k8s.io/client-go => github.com/rancher/client-go v1.28.6-rancher1
 )
 
