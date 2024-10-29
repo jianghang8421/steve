@@ -8,6 +8,7 @@ replace (
 	github.com/crewjam/saml => github.com/rancher/saml v0.2.0
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20181214184433-b04c0947ad2f
 	github.com/matryer/moq => github.com/rancher/moq v0.0.0-20190404221404-ee5226d43009
+	github.com/rancher/apiserver => github.com/jianghang8421/apiserver v0.0.0-20241029130823-5ed5b5eb3a8a
 )
 
 require (
