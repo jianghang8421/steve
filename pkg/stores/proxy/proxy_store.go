@@ -270,6 +270,7 @@ func returnErr(err error, c chan watch.Event) {
 }
 
 func (s *Store) listAndWatch(apiOp *types.APIRequest, client dynamic.ResourceInterface, schema *types.APISchema, w types.WatchRequest, result chan watch.Event) {
+	logrus.Infof("jianghang proxy store listAndWatch, apiOp.Schema.ID: %s", apiOp.Schema.ID)
 	rev := w.Revision
 	if rev == "-1" || rev == "0" {
 		rev = ""
@@ -405,6 +406,7 @@ func (s *Store) watch(apiOp *types.APIRequest, schema *types.APISchema, w types.
 		s.listAndWatch(apiOp, client, schema, w, result)
 		logrus.Debugf("closing watcher for %s", schema.ID)
 		close(result)
+		logrus.Infof("jianghang proxy store close result")
 	}()
 	return result, nil
 }

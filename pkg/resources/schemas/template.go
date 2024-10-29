@@ -48,6 +48,7 @@ type Store struct {
 // Watch will return a APIevent channel that tracks changes to schemas for a user in a given APIRequest.
 // Changes will be returned until Done is closed on the context in the given APIRequest.
 func (s *Store) Watch(apiOp *types.APIRequest, _ *types.APISchema, _ types.WatchRequest) (chan types.APIEvent, error) {
+	logrus.Infof("jianghang template store Watch, apiOp.Schema.ID: %s, apiOp.Schema.Schema.ID: %s", apiOp.Schema.ID, apiOp.Schema.Schema.ID)
 	user, ok := request.UserFrom(apiOp.Request.Context())
 	if !ok {
 		return nil, validation.Unauthorized
@@ -103,6 +104,7 @@ func (s *Store) Watch(apiOp *types.APIRequest, _ *types.APISchema, _ types.Watch
 
 // sendSchemas will send APIEvents onto the provided result channel based on detected changes in the schemas for the provided users.
 func (s *Store) sendSchemas(result chan types.APIEvent, apiOp *types.APIRequest, user user.Info, oldSchemas *types.APISchemas) *types.APISchemas {
+	logrus.Infof("jianghang template sendSchemas, apiOp.Schema.ID: %s, apiOp.Schema.Schema.ID: %s", apiOp.Schema.ID, apiOp.Schema.Schema.ID)
 	// get the current schemas for a user
 	schemas, err := s.sf.Schemas(user)
 	if err != nil {
