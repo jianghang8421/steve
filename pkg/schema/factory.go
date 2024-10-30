@@ -11,6 +11,7 @@ import (
 	"github.com/rancher/apiserver/pkg/types"
 	"github.com/rancher/steve/pkg/accesscontrol"
 	"github.com/rancher/steve/pkg/attributes"
+	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/authentication/user"
 )
@@ -46,6 +47,8 @@ func (c *Collection) Schemas(user user.Info) (*types.APISchemas, error) {
 		return nil, err
 	}
 	c.addToCache(access, user, schemas)
+
+	logrus.Infof("jianghang steve Collection Schemas c.schemas len: %v, c.templates len: %v", len(c.schemas), len(c.templates))
 	return schemas, nil
 }
 
@@ -82,12 +85,21 @@ func (c *Collection) schemasForSubject(access *accesscontrol.AccessSet) (*types.
 		return nil, err
 	}
 
+	logrus.Infof("jianghang schemasForSubject c.baseSchema len %v", len(c.baseSchema.Schemas))
+	for _, ts1 := range c.baseSchema.Schemas {
+		logrus.Infof("jianghang schemasForSubject c.baseSchema: %v", ts1.ID)
+	}
+
 	if err := result.AddSchemas(c.baseSchema); err != nil {
 		return nil, err
 	}
+	logrus.Infof("jianghang schemasForSubject c.schemas len %v", len(c.schemas))
 
 	for _, s := range c.schemas {
+		logrus.Infof("jianghang schemasForSubject s.ID %v", s.ID)
 		gr := attributes.GR(s)
+
+		logrus.Infof("jianghang schemasForSubject gr %v", gr.String())
 
 		if gr.Resource == "" {
 			if err := result.AddSchema(*s); err != nil {
